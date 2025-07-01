@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şirket Profili | KED SAVUNMA Havacılık A.Ş.</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav-menu {
+            background: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8B0000;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #8B0000;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #8B0000;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #8B0000, #DC143C);
+            border-radius: 2px;
+        }
+
+        /* Company Info Grid */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: #8B0000;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #8B0000, #DC143C);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .service-card h3 {
+            color: #8B0000;
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #8B0000, #DC143C);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            color: #8B0000;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, #8B0000, #DC143C);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .cert-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .cert-icon {
+            width: 60px;
+            height: 60px;
+            background: #8B0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            background: #001e3c;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #8B0000, #DC143C);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139,0,0,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>KED SAVUNMA Havacılık A.Ş.</h1>
+            <p>Savunma Sanayi ve Havacılık Teknolojilerinde Güvenilir Partner</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <div class="logo">KED SAVUNMA</div>
+            <ul class="nav-links">
+                <li><a href="main.html">Anasayfa</a></li>
+                <li><a href="#about">Hakkımızda</a></li>
+                <li><a href="#services">Hizmetler</a></li>
+                <li><a href="#projects">Projeler</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="kariyer.html">Kariyer</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Company Overview Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Şirket Profili</h2>
+            <div class="company-grid">
+                <div class="info-card fade-in">
+                    <h3><i class="fas fa-building"></i> Kurumsal Bilgiler</h3>
+                    <p><strong>Kuruluş:</strong> 2020<br>
+                    <strong>Merkez:</strong> Ankara, Türkiye<br>
+                    <strong>Faaliyet Alanı:</strong> Savunma Sanayi Danışmanlığı<br>
+                    <strong>Çalışan Sayısı:</strong> 50+ Uzman Personel<br>
+                    <strong>Yasal Statü:</strong> Anonim Şirket</p>
+                </div>
+                <div class="info-card fade-in">
+                    <h3><i class="fas fa-target"></i> Misyonumuz</h3>
+                    <p>Türkiye'nin savunma sanayiinde teknolojik bağımsızlığına katkı sağlamak, müşterilerimize en üst düzeyde danışmanlık hizmeti sunarak ülkemizin güvenlik ihtiyaçlarını karşılamaktır.</p>
+                </div>
+                <div class="info-card fade-in">
+                    <h3><i class="fas fa-eye"></i> Vizyonumuz</h3>
+                    <p>Savunma sanayi alanında Türkiye'nin önde gelen danışmanlık firması olmak ve uluslararası arenada tanınan bir marka haline gelmektir.</p>
+                </div>
+                <div class="info-card fade-in">
+                    <h3><i class="fas fa-heart"></i> Değerlerimiz</h3>
+                    <p>• Güvenilirlik ve Şeffaflık<br>
+                    • İnovasyon ve Teknoloji<br>
+                    • Kalite ve Mükemmellik<br>
+                    • Etik ve Sorumluluk<br>
+                    • Sürekli Gelişim</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title fade-in">Hizmet Alanlarımız</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Teknik Danışmanlık</h3>
+                    <p>Savunma sanayi projelerinde teknik danışmanlık, sistem analizi ve mühendislik çözümleri sunuyoruz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Havacılık Sistemleri</h3>
+                    <p>Havacılık teknolojileri, aviyonik sistemler ve hava araçları konularında uzman danışmanlık hizmetleri.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Savunma Teknolojileri</h3>
+                    <p>Modern savunma sistemleri, güvenlik teknolojileri ve stratejik savunma çözümleri geliştirme.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Proje Yönetimi</h3>
+                    <p>Savunma sanayi projelerinin başarılı yürütülmesi için kapsamlı proje yönetimi ve koordinasyon.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Güvenlik Danışmanlığı</h3>
+                    <p>Kurumsal güvenlik, siber güvenlik ve fiziksel güvenlik sistemleri konularında danışmanlık.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Kalite Güvencesi</h3>
+                    <p>Savunma sanayi standartlarına uygun kalite yönetim sistemleri ve sertifikasyon süreçleri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <h3>50+</h3>
+                    <p>Başarılı Proje</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>15+</h3>
+                    <p>Sektör Deneyimi</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>100+</h3>
+                    <p>Memnun Müşteri</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>25+</h3>
+                    <p>Uzman Personel</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Proje Alanlarımız</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-fighter-jet"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Hava Savunma Sistemleri</h3>
+                        <p>Modern hava savunma sistemlerinin geliştirilmesi, entegrasyonu ve operasyonel hazırlığı konularında danışmanlık hizmetleri.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Uzay ve Uydu Teknolojileri</h3>
+                        <p>Uydu sistemleri, uzay teknolojileri ve haberleşme sistemleri alanında teknik danışmanlık ve proje yönetimi.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Deniz Savunma Sistemleri</h3>
+                        <p>Denizcilik savunma teknolojileri, gemi sistemleri ve deniz güvenliği konularında uzman danışmanlık.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>İnsansız Sistemler</h3>
+                        <p>İHA, SİHA ve otonom sistemler konularında teknoloji geliştirme ve sistem entegrasyonu danışmanlığı.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Siber Güvenlik</h3>
+                        <p>Kritik altyapı güvenliği, siber savunma sistemleri ve bilgi güvenliği konularında danışmanlık.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Ar-Ge ve İnovasyon</h3>
+                        <p>Savunma sanayi Ar-Ge projeleri, teknoloji transferi ve inovasyon yönetimi danışmanlığı.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title fade-in">Sertifikalar ve Standartlar</h2>
+            <div class="cert-grid">
+                <div class="cert-item fade-in">
+                    <div class="cert-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4>ISO 9001:2015</h4>
+                    <p>Kalite Yönetim Sistemi</p>
+                </div>
+                <div class="cert-item fade-in">
+                    <div class="cert-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>ISO 27001</h4>
+                    <p>Bilgi Güvenliği</p>
+                </div>
+                <div class="cert-item fade-in">
+                    <div class="cert-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h4>AS9100</h4>
+                    <p>Havacılık Kalite Standardı</p>
+                </div>
+                <div class="cert-item fade-in">
+                    <div class="cert-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4>NATO AQAP</h4>
+                    <p>NATO Kalite Güvence</p>
+                </div>
+                <div class="cert-item fade-in">
+                    <div class="cert-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4>Güvenlik Sertifikası</h4>
+                    <p>Gizlilik Dereceli Bilgi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Projelerinizde Size Nasıl Yardımcı Olabiliriz?</h2>
+            <p>Uzman ekibimizle savunma sanayi projelerinizde yanınızdayız.</p>
+            <a href="iletisim.html" class="cta-button">İletişime Geçin</a>
+        </div>
+    </section>
+
+    <script>
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
