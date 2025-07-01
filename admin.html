@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KED Admin Panel - Pozisyon Yönetimi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; margin: 0; }
+        .container { max-width: 600px; margin: 3rem auto; background: #fff; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,30,60,0.08); padding: 2.5rem; }
+        h1 { color: #8B0000; text-align: center; margin-bottom: 2rem; }
+        .positions-list { list-style: none; padding: 0; margin-bottom: 2rem; }
+        .positions-list li { display: flex; align-items: center; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px solid #eee; }
+        .positions-list li:last-child { border-bottom: none; }
+        .positions-list span { flex: 1; }
+        .remove-btn { background: #DC143C; color: #fff; border: none; border-radius: 5px; padding: 0.3rem 0.8rem; cursor: pointer; margin-left: 1rem; }
+        .remove-btn:hover { background: #8B0000; }
+        .add-form { display: flex; gap: 1rem; }
+        .add-form input { flex: 1; padding: 0.7rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+        .add-form button { padding: 0.7rem 1.5rem; background: linear-gradient(45deg, #8B0000, #DC143C); color: #fff; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .add-form button:hover { background: #B22222; }
+        .info { color: #888; font-size: 0.95rem; margin-top: 1.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pozisyonları Yönet</h1>
+        <ul class="positions-list" id="positions-list">
+            <!-- Pozisyonlar buraya gelecek -->
+        </ul>
+        <form class="add-form" id="add-form">
+            <input type="text" id="new-position" placeholder="Yeni pozisyon ekle..." required>
+            <button type="submit">Ekle</button>
+        </form>
+        <div class="info">
+            <i class="fas fa-info-circle"></i> Değişiklikler tarayıcıda saklanır. Pozisyonlar otomatik olarak kariyer sayfasında güncellenir (aynı tarayıcıda).
+        </div>
+    </div>
+    <script>
+        // Pozisyonları localStorage'dan al veya varsayılanları kullan
+        const defaultPositions = [
+            'Savunma Sanayi Uzmanı',
+            'Havacılık Mühendisi',
+            'Proje Yöneticisi',
+            'Güvenlik Danışmanı',
+            'Sistem Entegrasyon Uzmanı'
+        ];
+        function getPositions() {
+            const stored = localStorage.getItem('ked_positions');
+            return stored ? JSON.parse(stored) : defaultPositions;
+        }
+        function setPositions(positions) {
+            localStorage.setItem('ked_positions', JSON.stringify(positions));
+        }
+        function renderPositions() {
+            const list = document.getElementById('positions-list');
+            list.innerHTML = '';
+            getPositions().forEach((pos, idx) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${pos}</span><button class="remove-btn" data-idx="${idx}">Sil</button>`;
+                list.appendChild(li);
+            });
+        }
+        document.getElementById('add-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('new-position');
+            const val = input.value.trim();
+            if (val) {
+                const positions = getPositions();
+                positions.push(val);
+                setPositions(positions);
+                renderPositions();
+                input.value = '';
+            }
+        });
+        document.getElementById('positions-list').addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-btn')) {
+                const idx = parseInt(e.target.getAttribute('data-idx'));
+                const positions = getPositions();
+                positions.splice(idx, 1);
+                setPositions(positions);
+                renderPositions();
+            }
+        });
+        // İlk yüklemede pozisyonları göster
+        renderPositions();
+    </script>
+</body>
+</html>

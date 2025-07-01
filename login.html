@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap | KED Kariyer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            min-height: 100vh;
+            height: 100vh;
+            background: linear-gradient(135deg, #c41e3a 0%, #d32f2f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: auto;
+        }
+        .login-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+            max-width: 600px;
+            min-width: 340px;
+            width: 95vw;
+            min-height: 420px;
+            max-height: 90vh;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            box-sizing: border-box;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .login-card .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 1.2rem;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .login-card .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f2f2f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #8B0000;
+            margin-bottom: 1.2rem;
+        }
+        .login-card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #222;
+        }
+        .login-card .subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1.2rem;
+        }
+        .login-card .linkedin-btn {
+            width: 100%;
+            background: #0077b5;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.9rem 0;
+            font-size: 1.08rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            transition: background 0.2s;
+        }
+        .login-card .linkedin-btn:hover {
+            background: #005983;
+        }
+        .login-card .or {
+            width: 100%;
+            text-align: center;
+            color: #aaa;
+            margin: 1.2rem 0 1rem 0;
+            position: relative;
+        }
+        .login-card .or:before, .login-card .or:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #eee;
+        }
+        .login-card .or:before { left: 0; }
+        .login-card .or:after { right: 0; }
+        .login-card form {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .login-card .form-group {
+            margin-bottom: 1.3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .login-card label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #222;
+            letter-spacing: 0.01em;
+        }
+        .login-card input[type="text"],
+        .login-card input[type="email"],
+        .login-card input[type="password"] {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8f9fa;
+            color: #333;
+            transition: border 0.2s;
+            margin-top: 0.1rem;
+            box-sizing: border-box;
+        }
+        @media (max-width: 500px) {
+            .login-card {
+                max-width: 99vw;
+                min-width: 0;
+                padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+                min-height: unset;
+                max-height: 98vh;
+            }
+        }
+        .login-card input:focus {
+            border: 1.5px solid #8B0000;
+            outline: none;
+        }
+        .login-card .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        .login-card .checkbox-group label {
+            font-size: 0.97rem;
+            color: #333;
+            font-weight: 400;
+        }
+        .login-card .captcha {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 1.1rem;
+        }
+        .login-card .captcha-img {
+            background: #f2f2f2;
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.2rem;
+            font-family: monospace;
+            color: #8B0000;
+            user-select: none;
+        }
+        .login-card .captcha-inputs {
+            display: flex;
+            gap: 0.3rem;
+        }
+        .login-card .captcha-inputs input {
+            width: 2.2rem;
+            text-align: center;
+            font-size: 1.1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 0.5rem 0;
+        }
+        .login-card .login-btn {
+            width: 100%;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 0.7rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .login-card .login-btn:hover {
+            background: #003366;
+        }
+        .login-card .links {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.1rem;
+        }
+        .login-card .links a {
+            color: #1976d2;
+            font-size: 0.97rem;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .login-card .links a:hover {
+            color: #8B0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="logo">KED SAVUNMA</div>
+        <div class="avatar"><i class="fas fa-user"></i></div>
+        <h2>Giriş Yap</h2>
+        <div class="subtitle">İş Başvuru Uygulaması Giriş</div>
+        <button class="linkedin-btn"><i class="fab fa-linkedin"></i> LinkedIn ile giriş yap</button>
+        <div class="or">VEYA</div>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login-email">T.C. Kimlik No / Telefon Numarası / E-posta Adresi *</label>
+                <input type="text" id="login-email" name="login-email" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Parola* <span style="font-size:0.95em;color:#888;font-weight:400;">(En az 8 karakter, büyük/küçük harf, rakam ve özel karakter)</span></label>
+                <input type="password" id="login-password" name="login-password" required autocomplete="current-password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':\"\\|,.<>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="kvkk" required>
+                <label for="kvkk">KVKK ile ilgili <a href="#" target="_blank">aydınlatma metnini</a> okudum.</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="consent" required>
+                <label for="consent">Aydınlatma metnindeki amaç ve koşullara uygun olarak ilgili kişisel verilerimin KED tarafından işlenmesine ve aktarılmasına rıza gösteriyorum.</label>
+            </div>
+            <div class="captcha">
+                <span class="captcha-img" id="captcha-img"></span>
+                <div class="captcha-inputs">
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                </div>
+            </div>
+            <button type="submit" class="login-btn">Giriş Yap</button>
+        </form>
+        <div class="links">
+            <a href="#">Şifremi Unuttum</a>
+            <a href="#">Cep Telefonu Numaramı Değiştir</a>
+        </div>
+    </div>
+    <script>
+        // Simple captcha generator
+        function generateCaptcha() {
+            let chars = '0123456789';
+            let code = '';
+            for (let i = 0; i < 5; i++) code += chars[Math.floor(Math.random()*chars.length)];
+            return code;
+        }
+        let captcha = generateCaptcha();
+        document.getElementById('captcha-img').textContent = captcha.split('').join(' ');
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let inputs = document.querySelectorAll('.captcha-inputs input');
+            let userCode = Array.from(inputs).map(i=>i.value).join('');
+            if (userCode !== captcha) {
+                alert('Güvenlik kodu yanlış!');
+                inputs.forEach(i=>i.value='');
+                inputs[0].focus();
+                captcha = generateCaptcha();
+                document.getElementById('captcha-img').textContent = captcha.split('').join(' ');
+                return;
+            }
+            let pw1 = document.getElementById('login-password').value;
+            // Password strength validation
+            const pwPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+            if (!pwPattern.test(pw1)) {
+                alert('Parola en az 8 karakter, bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir.');
+                return;
+            }
+            alert('Giriş başarılı! (Demo)');
+            this.reset();
+            captcha = generateCaptcha();
+            document.getElementById('captcha-img').textContent = captcha.split('').join(' ');
+        });
+        // Auto focus next captcha input
+        document.querySelectorAll('.captcha-inputs input').forEach((input, idx, arr) => {
+            input.addEventListener('input', function() {
+                if (this.value && idx < arr.length-1) arr[idx+1].focus();
+            });
+        });
+    </script>
+</body>
+</html>

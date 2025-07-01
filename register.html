@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KED Defense Uygulamaları Kayıt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #c41e3a 0%, #d32f2f 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            max-width: 450px;
+            width: 100%;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #c41e3a 0%, #d32f2f 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            width: 180px;
+            height: 60px;
+            background: white;
+            border-radius: 8px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: #c41e3a;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 10px;
+            opacity: 0.95;
+        }
+
+        .form-container {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: #fafbfc;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #c41e3a;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+        }
+
+        .password-requirements {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        .password-requirements h4 {
+            color: #495057;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .password-requirements ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .password-requirements li {
+            padding: 2px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .password-requirements li:before {
+            content: "•";
+            color: #c41e3a;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #c41e3a 0%, #d32f2f 100%);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(196, 30, 58, 0.4);
+        }
+
+        .btn-register:active {
+            transform: translateY(0);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .login-link a {
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 4px;
+            transform: scale(1.2);
+            accent-color: #c41e3a;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .logo {
+                width: 160px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">KED DEFENSE</div>
+            <h1>Uygulamaları Kayıt</h1>
+        </div>
+        
+        <div class="form-container">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="firstName">Ad <span class="required">*</span></label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Soyad <span class="required">*</span></label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-posta Adresi <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Telefon Numarası <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+90 (5xx) xxx xx xx" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Şirket/Kurum</label>
+                    <input type="text" id="company" name="company" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Şifre <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                    
+                    <div class="password-requirements">
+                        <h4>Şifre şunları içermelidir;</h4>
+                        <ul>
+                            <li>En az bir küçük harf</li>
+                            <li>En az bir büyük harf</li>
+                            <li>En az bir sayı</li>
+                            <li>En az bir özel karakter</li>
+                            <li>En az 8 karakter</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Şifre Tekrar <span class="required">*</span></label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">
+                        <a href="#" style="color: #c41e3a; text-decoration: none;">Kullanım Şartları</a> ve 
+                        <a href="#" style="color: #c41e3a; text-decoration: none;">Gizlilik Politikası</a>'nı okudum ve kabul ediyorum. <span class="required">*</span>
+                    </label>
+                </div>
+                
+                <div class="btn-container">
+                    <button type="submit" class="btn-register">Kayıt Ol</button>
+                </div>
+            </form>
+            
+            <div class="login-link">
+                Zaten hesabınız var mı? <a href="#">Giriş Yapın</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Password validation
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            
+            if (!passwordRegex.test(password)) {
+                alert('Şifre gereksinimleri karşılanmıyor. Lütfen şifre kurallarını kontrol edin.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Şifreler eşleşmiyor. Lütfen tekrar kontrol edin.');
+                return;
+            }
+            
+            // Phone number basic validation
+            const phone = document.getElementById('phone').value;
+            const phoneRegex = /^(\+90|0)?[\s\-\(\)]?[5][0-9]{2}[\s\-\(\)]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+            
+            if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+                alert('Geçerli bir telefon numarası girin.');
+                return;
+            }
+            
+            alert('Kayıt başarıyla tamamlandı! E-posta adresinize doğrulama bağlantısı gönderildi.');
+        });
+        
+        // Real-time password validation visual feedback
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const requirements = document.querySelectorAll('.password-requirements li');
+            
+            const checks = [
+                /[a-z]/.test(password), // lowercase
+                /[A-Z]/.test(password), // uppercase  
+                /\d/.test(password),    // number
+                /[@$!%*?&]/.test(password), // special char
+                password.length >= 8    // length
+            ];
+            
+            requirements.forEach((req, index) => {
+                if (checks[index]) {
+                    req.style.color = '#28a745';
+                    req.style.fontWeight = '600';
+                } else {
+                    req.style.color = '#6c757d';
+                    req.style.fontWeight = 'normal';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

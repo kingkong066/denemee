@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kariyer | KED Savunma Havacılık A.Ş.</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 25%, #DC143C 75%, #FF6347 100%);
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* Optional: Add a subtle animated overlay for extra modern look */
+        .career-bg-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.18;
+            animation: fadeCareerBg 18s linear infinite alternate;
+        }
+        @keyframes fadeCareerBg {
+            0% { opacity: 0.18; }
+            50% { opacity: 0.28; }
+            100% { opacity: 0.18; }
+        }
+        }
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: rgba(255,255,255,0.97);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,30,60,0.13);
+            padding: 3rem 2.5rem 2.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            color: #fff;
+            background: linear-gradient(90deg, #8B0000 60%, #DC143C 100%);
+            text-align: left;
+            margin-bottom: 2.5rem;
+            letter-spacing: 1px;
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-shadow: 2px 4px 16px rgba(139,0,0,0.18);
+            border-radius: 16px 16px 0 0;
+            padding: 1.2rem 2.5rem 1.2rem 1.5rem;
+            box-shadow: 0 4px 24px rgba(139,0,0,0.10);
+        }
+        .career-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+        }
+        .open-positions {
+            width: 100%;
+            max-width: 600px;
+            background: linear-gradient(120deg, #fff 80%, #f8f9fa 100%);
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(139,0,0,0.08);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            margin-bottom: 2rem;
+            margin-left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .open-positions h4 {
+            color: #8B0000;
+            margin-bottom: 1.2rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .positions-list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+        .position-card {
+            background: linear-gradient(90deg, #B22222 60%, #DC143C 100%);
+            color: #fff;
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            font-size: 1.08rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(139,0,0,0.08);
+            transition: background 0.2s, transform 0.2s;
+            min-width: 220px;
+            max-width: 260px;
+            justify-content: flex-start;
+            position: relative;
+        }
+        .position-card:hover {
+            background: linear-gradient(90deg, #DC143C 60%, #FF6347 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .qualifications-box {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 110%;
+            width: 100%;
+            background: #fff;
+            color: #8B0000;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(139,0,0,0.13);
+            padding: 1rem 1.2rem;
+            z-index: 10;
+            font-size: 0.98rem;
+            font-weight: 500;
+        }
+        .position-card.show-qual .qualifications-box {
+            display: block;
+        }
+        @media (max-width: 900px) {
+            .career-layout { flex-direction: column; gap: 1.5rem; }
+            .open-positions { margin-left: 0; max-width: 100%; }
+        }
+        .careers-info, .contact-info-box {
+            background: linear-gradient(45deg, #fff 80%, #f8f9fa 100%);
+            padding: 2rem 2rem 1.5rem 2rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(139,0,0,0.04);
+            animation: fadeInUp 0.8s;
+        }
+        .careers-info h4, .contact-info-box h4 {
+            color: #8B0000;
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .careers-info ul, .contact-info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .careers-info li, .contact-info-box li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 1.08rem;
+            display: flex;
+            align-items: center;
+        }
+        .careers-info li:last-child, .contact-info-box li:last-child {
+            border-bottom: none;
+        }
+        .careers-info li i, .contact-info-box li i {
+            margin-right: 0.7rem;
+            color: #8B0000;
+            font-size: 1.1rem;
+        }
+        .careers-form, .contact-form-box {
+            background: rgba(255,255,255,0.95);
+            padding: 2.2rem 2rem 2rem 2rem;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(139,0,0,0.04);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1.1s;
+        }
+        .careers-form h3, .contact-form-box h3 {
+            color: #8B0000;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 1.3rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #001e3c;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8f9fa;
+            transition: border 0.2s;
+            color: #333;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border: 1.5px solid #8B0000;
+            outline: none;
+        }
+        .form-group textarea {
+            height: 110px;
+            resize: vertical;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, #8B0000, #DC143C);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 18px rgba(139,0,0,0.08);
+        }
+        .submit-btn:hover {
+            background: #B22222;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139,0,0,0.13);
+        }
+        .info-text {
+            margin-top: 1.2rem;
+            font-size: 0.98rem;
+            color: #8B0000;
+            text-align: center;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 900px) {
+            .container { padding: 1.2rem; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 0.5rem; }
+            .careers-info, .careers-form, .contact-info-box, .contact-form-box { padding: 1rem; }
+        }
+    </style>
+<script>
+// Add animated overlay for extra effect (optional, can be removed if not wanted)
+window.addEventListener('DOMContentLoaded', function() {
+    if (!document.querySelector('.career-bg-overlay')) {
+        const overlay = document.createElement('div');
+        overlay.className = 'career-bg-overlay';
+        document.body.appendChild(overlay);
+    }
+});
+</script>
+</head>
+<body>
+    <div class="container">
+        <h1>Kariyer</h1>
+        <div class="career-layout">
+            <div class="open-positions">
+                <h4>Açık Pozisyonlar</h4>
+                <div id="positions-list" class="positions-list"></div>
+            </div>
+            <div style="flex:1; min-width:320px;">
+                <div class="careers-form" style="margin-bottom:2.5rem;">
+                    <h3 style="color:#8B0000; font-size:1.5rem; font-weight:800; letter-spacing:1px;">Başvuru Formu</h3>
+                    <form id="career-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="career-name">Ad Soyad</label>
+                            <input type="text" id="career-name" name="career-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="career-email">E-posta</label>
+                            <input type="email" id="career-email" name="career-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="career-phone">Telefon</label>
+                            <input type="tel" id="career-phone" name="career-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="position">İlgilendiğiniz Pozisyon</label>
+                            <select id="position" name="position" required>
+                                <option value="">Pozisyon Seçiniz</option>
+                                <!-- Pozisyonlar buraya JS ile gelecek -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Deneyim (Yıl)</label>
+                            <select id="experience" name="experience" required>
+                                <option value="">Deneyim Seçiniz</option>
+                                <option value="0-2">0-2 Yıl</option>
+                                <option value="3-5">3-5 Yıl</option>
+                                <option value="6-10">6-10 Yıl</option>
+                                <option value="10+">10+ Yıl</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cover-letter">Ön Yazı</label>
+                            <textarea id="cover-letter" name="cover-letter" placeholder="Kendinizi kısaca tanıtın ve neden bu pozisyon için uygun olduğunuzu açıklayın..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cv-file">CV Yükle (PDF, DOC, DOCX)</label>
+                            <input type="file" id="cv-file" name="cv-file" accept=".pdf,.doc,.docx" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Başvuru Gönder</button>
+                    </form>
+                    <div class="info-text">CV'niz ve başvuru bilgileriniz gizli tutulacaktır.</div>
+                </div>
+                <div class="careers-info">
+                    <h4>Neden KED?</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Dinamik ve profesyonel çalışma ortamı</li>
+                        <li><i class="fas fa-check"></i> Kariyer gelişim fırsatları</li>
+                        <li><i class="fas fa-check"></i> Rekabetçi maaş ve yan haklar</li>
+                        <li><i class="fas fa-check"></i> İleri teknoloji projelerinde çalışma</li>
+                        <li><i class="fas fa-check"></i> Eğitim ve gelişim programları</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Pozisyonları localStorage'dan oku ve güncelle
+        function getPositions() {
+            // Now each position is an object with name and qualifications
+            const defaultPositions = [
+                {
+                    name: 'Savunma Sanayi Uzmanı',
+                    qualifications: [
+                        'Savunma sanayi projelerinde en az 3 yıl deneyim',
+                        'İyi derecede İngilizce',
+                        'Takım çalışmasına yatkınlık',
+                        'MS Office ve proje yönetim araçlarına hakimiyet'
+                    ]
+                },
+                {
+                    name: 'Havacılık Mühendisi',
+                    qualifications: [
+                        'Havacılık veya ilgili mühendislik bölümlerinden mezun',
+                        'CATIA, SolidWorks veya benzeri CAD programlarına hakim',
+                        'Teknik dokümantasyon hazırlama yeteneği',
+                        'İleri düzeyde problem çözme becerisi'
+                    ]
+                },
+                {
+                    name: 'Proje Yöneticisi',
+                    qualifications: [
+                        'Proje yönetimi konusunda en az 5 yıl deneyim',
+                        'PMP veya benzeri sertifika tercih sebebidir',
+                        'Liderlik ve iletişim becerileri',
+                        'Bütçe ve zaman yönetimi yetkinliği'
+                    ]
+                },
+                {
+                    name: 'Güvenlik Danışmanı',
+                    qualifications: [
+                        'Bilgi güvenliği veya fiziksel güvenlik alanında deneyim',
+                        'Güvenlik standartları ve mevzuat bilgisi',
+                        'Analitik düşünme yeteneği',
+                        'Raporlama ve sunum becerisi'
+                    ]
+                },
+                {
+                    name: 'Sistem Entegrasyon Uzmanı',
+                    qualifications: [
+                        'Sistem entegrasyonu ve test süreçlerinde deneyim',
+                        'Donanım ve yazılım bilgisi',
+                        'Takım çalışmasına yatkınlık',
+                        'İyi derecede İngilizce'
+                    ]
+                }
+            ];
+            const stored = localStorage.getItem('ked_positions');
+            // If stored, try to parse as array of objects, else fallback
+            try {
+                const parsed = stored ? JSON.parse(stored) : null;
+                if (parsed && Array.isArray(parsed) && typeof parsed[0] === 'object') return parsed;
+            } catch(e) {}
+            return defaultPositions;
+        }
+        // Açık pozisyonları listele
+        function renderPositions() {
+            const positions = getPositions();
+            // Centered clickable cards with qualifications
+            const list = document.getElementById('positions-list');
+            if (list) {
+                list.innerHTML = '';
+                positions.forEach((posObj, idx) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'position-card';
+                    btn.innerHTML = `<i class="fas fa-briefcase"></i> ${posObj.name}`;
+                    // Qualifications box
+                    const qualBox = document.createElement('div');
+                    qualBox.className = 'qualifications-box';
+                    qualBox.innerHTML = `<strong>Aranan Nitelikler:</strong><ul style='margin:0.5rem 0 0 1.2rem;padding:0;'>${posObj.qualifications.map(q=>`<li style='color:#8B0000;list-style:disc;font-size:0.97rem;'>${q}</li>`).join('')}</ul>`;
+                    btn.appendChild(qualBox);
+                    btn.onclick = function(e) {
+                        // Fill form
+                        const select = document.getElementById('position');
+                        if (select) {
+                            select.value = posObj.name;
+                            select.dispatchEvent(new Event('change'));
+                        }
+                        // Show/hide qualifications
+                        document.querySelectorAll('.position-card').forEach(card => {
+                            if (card !== btn) card.classList.remove('show-qual');
+                        });
+                        btn.classList.toggle('show-qual');
+                        // Scroll to form if not already visible
+                        if (!btn.classList.contains('show-qual')) return;
+                        setTimeout(()=>{
+                            document.getElementById('career-form').scrollIntoView({behavior:'smooth', block:'center'});
+                        }, 200);
+                    };
+                    list.appendChild(btn);
+                });
+            }
+            // Form select
+            const select = document.getElementById('position');
+            if (select) {
+                // Remove old options except the first
+                while (select.options.length > 1) select.remove(1);
+                positions.forEach(posObj => {
+                    const opt = document.createElement('option');
+                    opt.value = posObj.name;
+                    opt.textContent = posObj.name;
+                    select.appendChild(opt);
+                });
+            }
+        }
+        renderPositions();
+
+        // Başvuru formu kontrolü
+        document.getElementById('career-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('cv-file');
+            if (fileInput.files.length === 0) {
+                alert('Lütfen CV dosyanızı yükleyin.');
+                return;
+            }
+            const file = fileInput.files[0];
+            const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Lütfen PDF, DOC veya DOCX formatında bir dosya yükleyin.');
+                return;
+            }
+            alert('Başvurunuz alındı! CV ve başvuru bilgileriniz başarıyla gönderildi (Demo: dosya sunucuya yüklenmedi). En kısa sürede size dönüş yapacağız.');
+            this.reset();
+        });
+
+        // İletişim formu kontrolü
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mesajınız alındı! En kısa sürede size dönüş yapacağız.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

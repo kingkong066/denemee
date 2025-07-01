@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KED Savunma Havacılık A.Ş. - Savunma Sanayi Danışmanlığı</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 30, 60, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-image {
+            height: 40px;
+            margin-right: 1rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #FFB6C1;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FFB6C1;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 25%, #DC143C 75%, #FF6347 100%);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: left;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            padding-left: 5%;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInLeft 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInLeft 1s ease 0.3s both;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            animation: fadeInLeft 1s ease 0.6s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #8B0000, #DC143C);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3);
+            animation: fadeInLeft 1s ease 0.9s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(139, 0, 0, 0.4);
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            right: 20%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: -7s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            right: 30%;
+            animation-delay: -14s;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #001e3c;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #8B0000, #DC143C);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-features {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 30, 60, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #8B0000, #DC143C);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .feature-content h3 {
+            color: #001e3c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: #fff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 30, 60, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 30, 60, 0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #001e3c, #003d82);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .service-card h3 {
+            color: #001e3c;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Contact & Careers Section */
+        .contact-careers {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 100%);
+            color: #fff;
+        }
+
+        .contact-careers-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-section h3,
+        .careers-section h3 {
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #FFB6C1;
+        }
+
+        .contact-form,
+        .careers-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            color: #333;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.3);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, #8B0000, #DC143C);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3);
+        }
+
+        .careers-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        .careers-info h4 {
+            margin-bottom: 1rem;
+            color: #FFB6C1;
+        }
+
+        .careers-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .careers-info li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .careers-info li:last-child {
+            border-bottom: none;
+        }
+
+        .careers-info li i {
+            margin-right: 0.5rem;
+            color: #FFB6C1;
+        }
+
+        /* Footer */
+        .footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(360deg);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero {
+                padding-left: 5%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content,
+            .contact-careers-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <svg class="logo-image" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+                    <!-- KED Logo Recreation -->
+                    <rect x="0" y="15" width="120" height="30" fill="#8B0000" rx="5"/>
+                    <polygon points="120,15 140,15 130,30 120,45" fill="#8B0000"/>
+                    
+                    <!-- KED Text -->
+                    <text x="10" y="35" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">KED</text>
+                    
+                    <!-- SAVUNMA HAVACILIK Text -->
+                    <text x="145" y="28" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">SAVUNMA</text>
+                    <text x="145" y="42" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">HAVACILIK</text>
+                </svg>
+                <span>KED Savunma Havacılık A.Ş.</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Anasayfa</a></li>
+                <li><a href="#about">Hakkımızda</a></li>
+                <li><a href="#services">Hizmetler</a></li>
+                <li><a href="iletisim.html" target="_blank">İletişim</a></li>
+                <li><a href="kariyer.html" target="_blank">Kariyer</a></li>
+                <li><a href="login.html" target="_blank">Giriş Yap</a></li>
+                <li><a href="register.html" target="_blank">Kayıt Ol</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-elements">
+            <i class="fas fa-fighter-jet floating-element" style="font-size: 3rem;"></i>
+            <i class="fas fa-shield-alt floating-element" style="font-size: 2.5rem;"></i>
+            <i class="fas fa-satellite floating-element" style="font-size: 2rem;"></i>
+        </div>
+        <div class="hero-content">
+            <h1>KED Savunma Havacılık</h1>
+            <p class="subtitle">Savunma Sanayinin Güvenilir Partneri</p>
+            <p class="description">Uzman ekibimizle savunma sanayi alanında profesyonel danışmanlık hizmetleri sunuyoruz. Teknoloji ve güvenlik odaklı çözümlerle sektörün lideri olmaya devam ediyoruz.</p>
+            <a href="#contact" class="cta-button">İletişime Geçin</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title fade-in">Hakkımızda</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3 style="color: #001e3c; margin-bottom: 1rem; font-size: 1.5rem;">Savunma Sanayinde Uzman Kadro</h3>
+                    <p>KED Savunma Havacılık A.Ş. olarak, savunma sanayi alanında köklü deneyimimiz ve uzman kadromuzla sektörün güvenilir partneri konumundayız. Teknolojik gelişmeleri yakından takip ederek, müşterilerimize en güncel ve etkili çözümleri sunmaktayız.</p>
+                    <br>
+                    <p>Havacılık ve savunma teknolojileri alanındaki derin bilgi birikimimiz sayesinde, projelerinizin her aşamasında size rehberlik ediyoruz. Güvenlik, kalite ve mükemmellik ilkelerimizden ödün vermeden hizmet vermeye devam ediyoruz.</p>
+                </div>
+                <div class="about-features fade-in">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Uzman Kadro</h3>
+                            <p>Alanında deneyimli profesyonel ekip</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Güvenlik Odaklı</h3>
+                            <p>En yüksek güvenlik standartları</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>İleri Teknoloji</h3>
+                            <p>Güncel teknoloji ve çözümler</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title fade-in">Hizmetlerimiz</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Teknik Danışmanlık</h3>
+                    <p>Savunma sanayi projelerinde teknik danışmanlık ve sistem entegrasyonu hizmetleri sunuyoruz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Havacılık Sistemleri</h3>
+                    <p>Havacılık teknolojileri ve sistemlerinde uzman danışmanlık hizmetleri sağlıyoruz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <h3>Savunma Teknolojileri</h3>
+                    <p>Modern savunma teknolojileri ve güvenlik sistemlerinde profesyonel destek veriyoruz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Proje Yönetimi</h3>
+                    <p>Savunma sanayi projelerinin başarılı yürütülmesi için kapsamlı proje yönetimi hizmetleri.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Güvenlik Danışmanlığı</h3>
+                    <p>Kurumsal güvenlik ve siber güvenlik alanlarında uzman danışmanlık hizmetleri.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>Kalite Yönetimi</h3>
+                    <p>Savunma sanayi standartlarına uygun kalite yönetim sistemleri geliştirme ve uygulama.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Careers Section with Tabs -->
+    <section id="contact" class="contact-careers">
+        <div class="container">
+            <h2 class="section-title fade-in" style="color: #fff;">İletişim ve Kariyer</h2>
+            <!-- Tabs Navigation -->
+            <div class="tab-bar">
+                <button class="tab-btn active" data-tab="contact-tab">İletişim</button>
+                <button class="tab-btn" data-tab="career-tab">Kariyer</button>
+            </div>
+            <div class="tab-content">
+                <div id="contact-tab" class="tab-panel active">
+                    <!-- Contact Section -->
+                    <div class="contact-section fade-in">
+                        <h3>İletişim</h3>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Adres:</strong><br>
+                                    Ankara, Türkiye
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Telefon:</strong><br>
+                                    +90 (312) XXX XX XX
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>E-posta:</strong><br>
+                                    info@kedsavunma.com
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Çalışma Saatleri:</strong><br>
+                                    Pazartesi - Cuma: 09:00 - 18:00
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-form">
+                            <h4 style="margin-bottom: 1.5rem;">Mesaj Gönderin</h4>
+                            <form id="contact-form">
+                                <div class="form-group">
+                                    <label for="name">Ad Soyad</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">E-posta</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Telefon</label>
+                                    <input type="tel" id="phone" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Mesajınız</label>
+                                    <textarea id="message" name="message" required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">Mesaj Gönder</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="career-tab" class="tab-panel">
+                    <!-- Careers Section -->
+                    <div class="careers-section fade-in" id="careers">
+                        <h3>Kariyer</h3>
+                        <div class="careers-info">
+                            <h4>Açık Pozisyonlar</h4>
+                            <ul>
+                                <li><i class="fas fa-briefcase"></i> Savunma Sanayi Uzmanı</li>
+                                <li><i class="fas fa-briefcase"></i> Havacılık Mühendisi</li>
+                                <li><i class="fas fa-briefcase"></i> Proje Yöneticisi</li>
+                                <li><i class="fas fa-briefcase"></i> Güvenlik Danışmanı</li>
+                                <li><i class="fas fa-briefcase"></i> Sistem Entegrasyon Uzmanı</li>
+                            </ul>
+                        </div>
+                        <div class="careers-info">
+                            <h4>Neden KED?</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Dinamik ve profesyonel çalışma ortamı</li>
+                                <li><i class="fas fa-check"></i> Kariyer gelişim fırsatları</li>
+                                <li><i class="fas fa-check"></i> Rekabetçi maaş ve yan haklar</li>
+                                <li><i class="fas fa-check"></i> İleri teknoloji projelerinde çalışma</li>
+                                <li><i class="fas fa-check"></i> Eğitim ve gelişim programları</li>
+                            </ul>
+                        </div>
+                        <div class="careers-form">
+                            <h4 style="margin-bottom: 1.5rem;">Başvuru Formu</h4>
+                            <form id="career-form">
+                                <div class="form-group">
+                                    <label for="career-name">Ad Soyad</label>
+                                    <input type="text" id="career-name" name="career-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="career-email">E-posta</label>
+                                    <input type="email" id="career-email" name="career-email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="career-phone">Telefon</label>
+                                    <input type="tel" id="career-phone" name="career-phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="position">İlgilendiğiniz Pozisyon</label>
+                                    <select id="position" name="position" required>
+                                        <option value="">Pozisyon Seçiniz</option>
+                                        <option value="savunma-uzmani">Savunma Sanayi Uzmanı</option>
+                                        <option value="havacilik-muhendisi">Havacılık Mühendisi</option>
+                                        <option value="proje-yoneticisi">Proje Yöneticisi</option>
+                                        <option value="guvenlik-danismani">Güvenlik Danışmanı</option>
+                                        <option value="sistem-entegrasyon">Sistem Entegrasyon Uzmanı</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="experience">Deneyim (Yıl)</label>
+                                    <select id="experience" name="experience" required>
+                                        <option value="">Deneyim Seçiniz</option>
+                                        <option value="0-2">0-2 Yıl</option>
+                                        <option value="3-5">3-5 Yıl</option>
+                                        <option value="6-10">6-10 Yıl</option>
+                                        <option value="10+">10+ Yıl</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cover-letter">Ön Yazı</label>
+                                    <textarea id="cover-letter" name="cover-letter" placeholder="Kendinizi kısaca tanıtın ve neden bu pozisyon için uygun olduğunuzu açıklayın..." required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">Başvuru Gönder</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 KED Savunma Havacılık A.Ş. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <style>
+        .tab-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+        .tab-btn {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2.5rem;
+            border-radius: 30px 30px 0 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            outline: none;
+        }
+        .tab-btn.active {
+            background: #fff;
+            color: #8B0000;
+        }
+        .tab-content {
+            background: none;
+        }
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+    </style>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 30, 60, 0.98)';
+            } else {
+                header.style.background = 'rgba(0, 30, 60, 0.95)';
+            }
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mesajınız alındı! En kısa sürede size dönüş yapacağız.');
+            this.reset();
+        });
+
+        // Career form submission
+        document.getElementById('career-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Başvurunuz alındı! CV\'nizi ve ek belgelerinizi info@kedsavunma.com adresine göndermeyi unutmayın. En kısa sürede size dönüş yapacağız.');
+            this.reset();
+        });
+
+        // Mobile menu toggle (placeholder for future implementation)
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            // Mobile menu functionality can be added here
+            console.log('Mobile menu clicked');
+        });
+
+        // Tabs functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
